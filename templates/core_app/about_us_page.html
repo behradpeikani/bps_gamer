@@ -1,0 +1,11 @@
+{% load static %}
+{% extends 'base.html' %}
+
+{% block title %} BPS Gamer | About Us {% endblock title %}
+
+{% block content %}
+
+<h2>{{ obj.title }}</h2>
+<p>{{ obj.content|safe }}</p>
+
+{% endblock %}
