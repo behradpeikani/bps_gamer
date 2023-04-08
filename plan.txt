@@ -1,0 +1,15 @@
+1. write about us content
+2. create comment section on about us page
+3. create contact us form
+4. blog models (posts, tags, comment)
+5. blog list view with template
+6. blog detail view with template
+7. header template with navbar and logo
+8. footer template
+9. craate main page with introducation, first 4 latest posts and first 4 hot posts
+10. create videos section for my youtube channel with template
+11. test models
+12. favicon
+
+*** don't forget to create table content for blog section
+*** comment section should have reply button. doesn't need to like/dislike button
