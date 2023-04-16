@@ -1,11 +1,29 @@
-{% load static %}
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} BPS Gamer | About Us {% endblock title %}
 
 {% block content %}
 
-<h2>{{ obj.title }}</h2>
-<p>{{ obj.content|safe }}</p>
+<div class="row">
+	<div class="col-md-8">
+		<h2 class="text-center">{{ obj.title }}</h2>
+		<p>{{ obj.content|safe }}</p>
+		<div class="col-md-4">
+			<h4>Leave a Comment</h4>
+			<form method="post">
+   				{% csrf_token %}
+   				{{ form }}
+    			<button class="btn btn-primary" type="submit">Submit</button>
+			</form>
+		</div>
+		<div class="col-md-4">
+			{% for comment in comments %}
+			<h4>{{ comment.name }}</h4>
+			<p>{{ comment.comment }}</p>
+			{% endfor %}
+		</div>
+	</div>
+</div>
 
 {% endblock %}
