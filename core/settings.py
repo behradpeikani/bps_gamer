@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     #Local Apps
     'blog.apps.BlogConfig',
     'core_app.apps.CoreAppConfig',
+    # Third-Party Packages
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
