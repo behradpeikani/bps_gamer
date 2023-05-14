@@ -21,7 +21,7 @@ class Article(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, max_length=100, blank=True)
-    content = models.RichTextUploadingField()
+    content = RichTextUploadingField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)
