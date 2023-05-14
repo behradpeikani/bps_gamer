@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} BPS Gamer | Articles {% endblock title %}
+
+{% block content %}
+
+{% for article in articles %}
+  <h2><a href="{% url 'article-detail' article.slug %}">{{ article.title }}</a></h2>
+  <p>{{ article.content }}</p>
+{% endfor %}
+
+<!-- Add pagination links if needed -->
+{{ articles.paginator }}
+
+{% endblock %}
