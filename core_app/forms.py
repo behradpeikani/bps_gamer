@@ -1,5 +1,6 @@
 from django import forms
-from .models import Comment
+from .models import Comment, ContactUs
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -8,3 +9,9 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'reply_to': forms.HiddenInput(),
         }
+
+
+class ContactForm(forms.Form):
+    class Meta:
+        model = ContactUs
+        fields = ('name', 'email', 'message')

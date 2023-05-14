@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
 from django.views.generic import TemplateView
 from .models import AboutUs, Comment
-from .forms import CommentForm
+from .forms import CommentForm, ContactForm
 
 
 class AboutUsPage(TemplateView):
@@ -26,3 +28,13 @@ class AboutUsPage(TemplateView):
 			return redirect('about-us/')
 		else:
 			return self.form_invalid(form)
+
+
+class ContactUsView(FormView):
+    template_name = 'core_app/contact-us-page.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('contact-us')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
