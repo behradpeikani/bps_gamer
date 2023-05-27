@@ -1,0 +1,41 @@
+body {
+  background-color: #968d8d;
+}
+
+.navbar {
+  background-color: #000;
+  height: 50px;
+}
+
+.navbar-brand {
+  color: #fff;
+}
+
+.nav-link,
+.dropdown-item {
+  color: #fff;
+}
+
+.nav-link:hover,
+.dropdown-item:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.dropdown-menu {
+  background-color: #000;
+}
+
+.dropdown-divider {
+  background-color: #333;
+}
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-top: 50px;
+  background-color: #fff;
+}
