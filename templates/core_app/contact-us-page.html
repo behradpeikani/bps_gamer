@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} BPS Gamer | Contact Us {% endblock title %}
+{% block title %}BPS Gamer | Contact Us{% endblock title %}
 
 {% block content %}
-<div class="container">
-  <h2>Contact Us</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Send</button>
-  </form>
-</div>
+    <h2>Contact BPS Gamer</h2>
+    <p>If you have any questions or comments about BPS Gamer, please do not hesitate to contact us.</p>
+    
+        <form method="post" style="margin-bottom: 20px; margin-top: 20px;">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="id_name">Name</label>
+            {{ form.name }}
+          </div>
+          <div class="form-group">
+            <label for="id_email">Email</label>
+            {{ form.email }}
+          </div>
+          <div class="form-group">
+            <label for="id_message">Message</label>
+            {{ form.message }}
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-dark btn-block">Send</button>
+          </div>
+
+        </form>
+    
 {% endblock %}

@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 from django.views.generic import TemplateView
-from .models import AboutUs, Comment
+from .models import AboutUs, Comment, ContactUs
 from .forms import CommentForm, ContactForm
+from django.contrib import messages
 
 
 class AboutUsPage(TemplateView):
@@ -31,10 +32,19 @@ class AboutUsPage(TemplateView):
 
 
 class ContactUsView(FormView):
-    template_name = 'core_app/contact-us-page.html'
-    form_class = ContactForm
-    success_url = reverse_lazy('contact-us')
+	template_name = 'core_app/contact-us-page.html'
+	form_class = ContactForm
+	success_url = reverse_lazy('core_app:contact-us')
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+	def form_valid(self, form):
+		if form.is_valid():
+			name = form.cleaned_data['name']
+			email = form.cleaned_data['email']
+			message = form.cleaned_data['message']
+			ContactUs.objects.create(name=name, email=email, message=message)
+			messages.success(self.request, 'Your message has been sent successfully.', 'success')
+			return super().form_valid(form)
+		else:
+			messages.error(self.request, 
+				'Something went wrong! Please try again.', 'warning')
+			return redirect('core_app:contact-us')
