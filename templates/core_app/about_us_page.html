@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h2 class="text-center">{{ obj.title }}</h2>
-		<p>{{ obj.content|safe }}</p>
+		<p>{{ obj.content|safe|linebreaks  }}</p>
 		<div class="col-md-4">
 			<h4>Leave a Comment</h4>
 			<form method="post">
