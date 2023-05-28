@@ -32,4 +32,9 @@ footer {
 
 p {
    font-size: 17px;
+   margin: 0 0 1em;
+   padding: 0.5em;
+   line-height: 1.5;
+   text-align: justify;
+   text-indent: 1em;
 }
