@@ -15,15 +15,13 @@ class AboutUs(models.Model):
 
 
 class Comment(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    comment = models.TextField()
-    reply_to = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
-    created_at = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
+    content = models.TextField()
+    author = models.CharField(max_length=100, default='')
+    timestamp = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='replies')
 
     def __str__(self):
-        return self.comment
+        return self.content
 
 
 class ContactUs(models.Model):
