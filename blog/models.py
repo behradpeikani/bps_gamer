@@ -32,13 +32,3 @@ class Article(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-
-class Comment(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    comment = models.TextField()
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.comment

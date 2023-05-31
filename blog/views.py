@@ -19,17 +19,3 @@ class ArticleDetailView(DetailView):
         context['comment_form'] = CommentForm()
         return context
 
-
-class AddCommentView(FormView):
-    form_class = CommentForm
-    template_name = 'blog/article_detail.html'
-
-    def form_valid(self, form):
-        article = get_object_or_404(Article, slug=self.kwargs['slug'])
-        comment = form.save(commit=False)
-        comment.article = article
-        comment.save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('article-detail', kwargs={'slug': self.kwargs['slug']})
