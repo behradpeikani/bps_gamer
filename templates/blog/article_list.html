@@ -5,12 +5,33 @@
 
 {% block content %}
 
-{% for article in articles %}
-  <h2><a href="{% url 'article-detail' article.slug %}">{{ article.title }}</a></h2>
-  <p>{{ article.content }}</p>
-{% endfor %}
-
-<!-- Add pagination links if needed -->
-{{ articles.paginator }}
-
+<section>
+    <div class="text-center mb-5">
+        <h2 class="display-20 display-md-18 display-lg-16"><i class="fa-sharp fa-solid fa-font-case">Most recent our blog</i></h2>
+    </div>
+    <div class="row">   
+    		{% for article in articles %}
+        <div class="col-lg-4 col-md-6 mb-2-6 mb-md-0">
+            <article class="card card-style2">
+                <div class="card-img">
+                    <img class="rounded-top" src="https://www.bootdey.com/image/350x280/4682B4/000000" alt="...">
+                    <div class="date"><span>{{ article.created_at|date:"j" }}</span>{{ article.created_at|date:"F" }}</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="h5"><a href="#!">{{ article.title }}</a></h3>
+                    <p class="display-30">{{ article.content|truncatewords:10|safe }}</p>
+                    <a href="{% url 'blog:article-detail' article.slug %}" class="read-more">read more</a>
+                </div>
+                <div class="card-footer">
+                    <ul>
+                        <li><a href="#!"><i class="fas fa-user"></i>{{ article.author.username }}</a></li>
+                        <li><a href="#!"><i class="far fa-comment-dots"></i><span>09</span></a></li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+								
 {% endblock %}

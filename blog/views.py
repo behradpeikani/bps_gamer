@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.shortcuts import get_object_or_404
 from .models import Article, Category, Tag
-from .forms import CommentForm
+
 
 class ArticleListView(ListView):
     model = Article
@@ -14,8 +14,15 @@ class ArticleDetailView(DetailView):
     template_name = 'blog/article_detail.html'
     context_object_name = 'article'
 
+
+class TagView(ListView):
+    template_name = 'blog/tag_view.html'
+    model =Tag
+    paginate_by = 10
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comment_form'] = CommentForm()
+        slug = self.kwargs.get('slug')
+        context["tag"] = get_object_or_404(Tag, slug=slug)
         return context
-
+    

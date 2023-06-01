@@ -16,7 +16,7 @@ class AboutUs(models.Model):
 
 class Comment(models.Model):
     content = models.TextField()
-    author = models.CharField(max_length=100, default='')
+    author = models.CharField(max_length=100)
     timestamp = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='replies')
 
