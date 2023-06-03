@@ -27,7 +27,7 @@
                         </div>
                         <div class="nav tag-cloud">
                             {% for tag in article.tags.all %}
-                            <a href="#">{{ tag.name }}</a>
+                            <a href="{% url 'blog:tag-view' tag.random_id %}">{{ tag.name }}</a>
                             {% endfor %}
                         </div>
                     </article>

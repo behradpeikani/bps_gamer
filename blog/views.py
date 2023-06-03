@@ -22,7 +22,9 @@ class TagView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        slug = self.kwargs.get('slug')
-        context["tag"] = get_object_or_404(Tag, slug=slug)
+        tag_id = self.kwargs.get('tag_id')
+        context["tag"] = get_object_or_404(Tag, random_id=tag_id)
         return context
+
+    
     
