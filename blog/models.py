@@ -7,11 +7,15 @@ import random
 
 
 class Category(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(unique=True, max_length=100, blank=True)
     name = models.CharField(max_length=100)
 
     class Meta:
         verbose_name_plural = 'Categories'
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

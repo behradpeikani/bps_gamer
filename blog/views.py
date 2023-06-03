@@ -9,6 +9,7 @@ class ArticleListView(ListView):
     context_object_name = 'articles'
     paginate_by = 10
 
+
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'blog/article_detail.html'
@@ -17,7 +18,7 @@ class ArticleDetailView(DetailView):
 
 class TagView(ListView):
     template_name = 'blog/tag_view.html'
-    model =Tag
+    model = Tag
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -26,5 +27,18 @@ class TagView(ListView):
         context["tag"] = get_object_or_404(Tag, random_id=tag_id)
         return context
 
-    
+
+class CategoryView(ListView):
+    template_name = 'blog/category_view.html'
+    model = Category
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        slug = self.kwargs.get('slug')
+        context["category"] = get_object_or_404(Category, slug=slug)
+        return context
+
+
+
     
