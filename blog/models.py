@@ -3,20 +3,26 @@ from django.utils.text import slugify
 import uuid
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
+import random
 
 
 class Category(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(unique=True, max_length=100, blank=True)
     name = models.CharField(max_length=100)
 
     class Meta:
         verbose_name_plural = 'Categories'
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
 class Tag(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
+    random_id = models.PositiveIntegerField(unique=True, default=random.randint(1000, 9999))
     name = models.CharField(max_length=100)
 
     def __str__(self):

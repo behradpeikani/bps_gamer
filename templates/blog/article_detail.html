@@ -14,7 +14,7 @@
                             <img src="https://www.bootdey.com/image/800x350/87CEFA/000000" title="" alt="">
                         </div>
                         <div class="article-title">
-                            <h6><a href="#">{{ article.category }}</a></h6>
+                            <h6><a href="{% url 'blog:category-view' article.category.slug %}">{{ article.category }}</a></h6>
                             <h2>{{ article.title }}</h2>
                             <div class="media">
                                 <div class="media-body">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="nav tag-cloud">
                             {% for tag in article.tags.all %}
-                            <a href="#">{{ tag.name }}</a>
+                            <a href="{% url 'blog:tag-view' tag.random_id %}">{{ tag.name }}</a>
                             {% endfor %}
                         </div>
                     </article>

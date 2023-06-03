@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block title %} BPS Gamer | {{ tag.name }} {% endblock %}
+{% block title %} BPS Gamer | {{ category.name }} {% endblock %}
 
-{% block content %} 
+{% block content %}
 
 <section>
-	{% for article in tag.article_set.all %}
+	{% for article in category.article_set.all %}
     <div class="text-center mb-5">
-        <h2 class="display-20 display-md-18 display-lg-16"><i class="fa-sharp fa-solid fa-font-case">{{ tag.name }}</i></h2>
+        <h2 class="display-20 display-md-18 display-lg-16"><i class="fa-sharp fa-solid fa-font-case">{{ category.name }}</i></h2>
     </div>
     <div class="row">   
         <div class="col-lg-4 col-md-6 mb-2-6 mb-md-0">
