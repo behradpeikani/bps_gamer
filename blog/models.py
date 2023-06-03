@@ -6,6 +6,12 @@ from django.contrib.auth.models import User
 import random
 
 
+# Model Manager
+class ArticlePublishManager(models.Manager):
+    def published(self):
+        return self.filter(status='publish')
+
+
 class Category(models.Model):
     slug = models.SlugField(unique=True, max_length=100, blank=True)
     name = models.CharField(max_length=100)
@@ -29,7 +35,12 @@ class Tag(models.Model):
         return self.name
 
 class Article(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    OPTIONS = (
+    ('draft', 'Draft'),
+    ('published', 'Published')
+    )
+
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, max_length=100, blank=True)
@@ -38,6 +49,8 @@ class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=100, choices=OPTIONS, default='publish')
+    objects = ArticlePublishManager()
 
     def __str__(self):
         return self.title
