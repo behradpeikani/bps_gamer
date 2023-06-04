@@ -1,18 +1,21 @@
 from django.views.generic import ListView, DetailView, FormView
+from django.views import View
 from django.shortcuts import get_object_or_404
 from .models import Article, Category, Tag
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 class ArticleListView(ListView):
-    model = Article
     template_name = 'blog/article_list.html'
+    queryset = Article.objects.published()
     context_object_name = 'articles'
     paginate_by = 10
 
 
 class ArticleDetailView(DetailView):
-    model = Article
     template_name = 'blog/article_detail.html'
+    queryset = Article.objects.published()
     context_object_name = 'article'
 
 
@@ -38,6 +41,7 @@ class CategoryView(ListView):
         slug = self.kwargs.get('slug')
         context["category"] = get_object_or_404(Category, slug=slug)
         return context
+
 
 
 

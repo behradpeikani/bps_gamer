@@ -6,11 +6,11 @@
 {% block content %} 
 
 <section>
-	{% for article in tag.article_set.all %}
     <div class="text-center mb-5">
         <h2 class="display-20 display-md-18 display-lg-16"><i class="fa-sharp fa-solid fa-font-case">{{ tag.name }}</i></h2>
     </div>
     <div class="row">   
+        {% for article in tag.article_set.published %}
         <div class="col-lg-4 col-md-6 mb-2-6 mb-md-0">
             <article class="card card-style2">
                 <div class="card-img">
@@ -30,8 +30,8 @@
                 </div>
             </article>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </section>
 
 {% endblock %}
