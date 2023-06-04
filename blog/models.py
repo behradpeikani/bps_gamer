@@ -9,7 +9,7 @@ import random
 # Model Manager
 class ArticlePublishManager(models.Manager):
     def published(self):
-        return self.filter(status='publish')
+        return self.filter(status='published')
 
 
 class Category(models.Model):
