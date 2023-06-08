@@ -15,6 +15,11 @@ class ArticleDetailView(DetailView):
     queryset = Article.objects.published()
     context_object_name = 'article'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_articles'] = Article.objects.published().exclude(pk=self.object.pk)[:3]
+        return context
+
 
 class TagView(ListView):
     template_name = 'blog/tag_view.html'

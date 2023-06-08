@@ -25,6 +25,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Tag(models.Model):
     id = models.AutoField(primary_key=True)
     random_id = models.PositiveIntegerField(unique=True, default=random.randint(1000, 9999))
@@ -32,6 +33,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Article(models.Model):
 
