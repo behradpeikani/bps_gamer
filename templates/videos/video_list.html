@@ -5,6 +5,32 @@
 
 {% block content %}
 
-
+<section>
+    <div class="text-center mb-5">
+        <h2 class="display-20 display-md-18 display-lg-16"><i class="fa-sharp fa-solid fa-font-case">Recent videos</i></h2>
+    </div>
+    <div class="row">   
+    		{% for video in videos %}
+        <div class="col-lg-4 col-md-6 mb-2-6 mb-md-0">
+            <article class="card card-style2">
+                <div class="card-img">
+                    <img class="rounded-top" src="https://www.bootdey.com/image/350x280/4682B4/000000" alt="...">
+                    <div class="date"><span>{{ video.created_at|date:"j" }}</span>{{ video.created_at|date:"F" }}</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="h5"><a href="#!">{{ video.title }}</a></h3>
+                    <a href="{% url 'videos:video-detail' video.pk %}" class="read-more">View</a>
+                </div>
+                <div class="card-footer">
+                    <ul>
+                        <li><a href="#!"><i class="fas fa-user"></i>{{ video.author.username }}</a></li>
+                        <li><a href="#!"><i class="far fa-comment-dots"></i><span>09</span></a></li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+</section>
 
 {% endblock %}

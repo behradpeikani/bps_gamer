@@ -1,5 +1,6 @@
 from django.db import models
 import random
+from blog.models import Tag, Category
 
 
 class Video(models.Model):
@@ -9,7 +10,9 @@ class Video(models.Model):
 	thumbnail = models.ImageField()
 	description = models.TextField()
 	iframe = models.TextField()
-	tags = models.CharField(max_length=255)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE, default='')
+	tags = models.ManyToManyField(Tag)
+	created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.title
