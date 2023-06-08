@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.text import slugify
-import uuid
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 import random

@@ -1,9 +1,6 @@
-from django.views.generic import ListView, DetailView, FormView
-from django.views import View
+from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404
 from .models import Article, Category, Tag
-from django.db.models import Q
-from django.core.paginator import Paginator
 
 
 class ArticleListView(ListView):

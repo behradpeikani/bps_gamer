@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # Third-Party Packages
     'ckeditor',
     'ckeditor_uploader',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
