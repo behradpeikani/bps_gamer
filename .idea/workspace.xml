@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6964957b-ad15-4d6f-b62d-3e724bda82c1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0010_alter_tag_random_id.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/migrations/0010_alter_tag_random_id.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog/article_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/article_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog/article_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/article_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +81,7 @@
       <workItem from="1686133726627" duration="124000" />
       <workItem from="1686133859647" duration="136000" />
       <workItem from="1686201511719" duration="689000" />
-      <workItem from="1686202235549" duration="947000" />
+      <workItem from="1686202235549" duration="1749000" />
     </task>
     <servers />
   </component>

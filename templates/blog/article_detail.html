@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block title %} BPS Gamer | {{ article.title }} {% endblock title %}
 
@@ -11,7 +12,10 @@
                 <div class="col-lg-8 m-15px-tb">
                     <article class="article">
                         <div class="article-img">
-                            <img src="https://www.bootdey.com/image/800x350/87CEFA/000000" title="" alt="">
+                            {% thumbnail article.image "800x350" crop="center" as im %}
+                                <img class="rounded-top" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="...">
+                            {% endthumbnail %}
+{#                            <img src="https://www.bootdey.com/image/800x350/87CEFA/000000" title="" alt="">#}
                         </div>
                         <div class="article-title">
                             <h6><a href="{% url 'blog:category-view' article.category.slug %}">{{ article.category }}</a></h6>
