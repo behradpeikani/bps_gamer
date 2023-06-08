@@ -6,5 +6,5 @@ __pycache__/
 /media/
 /static_root/
 plan.txt
- blog/migrations/
- .idea
+blog/migrations/
+.idea
