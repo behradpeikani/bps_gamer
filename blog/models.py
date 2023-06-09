@@ -3,6 +3,8 @@ from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 import random
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 
 # Model Manager
@@ -51,6 +53,7 @@ class Article(models.Model):
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=100, choices=OPTIONS, default='publish')
+    comments = GenericRelation(Comment)
     objects = ArticlePublishManager()
 
     def __str__(self):
