@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'sorl.thumbnail',
+    'mptt',
 ]
 
 MIDDLEWARE = [
