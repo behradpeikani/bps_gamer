@@ -10,7 +10,6 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('videos/', include('videos.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('comment/', include('comment.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
