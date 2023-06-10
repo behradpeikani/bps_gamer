@@ -3,8 +3,7 @@ from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 import random
-from django.contrib.contenttypes.fields import GenericRelation
-from comment.models import Comment
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 # Model Manager
@@ -53,7 +52,6 @@ class Article(models.Model):
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=100, choices=OPTIONS, default='publish')
-    comments = GenericRelation(Comment)
     objects = ArticlePublishManager()
 
     def __str__(self):
@@ -62,3 +60,21 @@ class Article(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class Comment(MPTTModel):
+
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=50)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
+                            related_name='children')
+    email = models.EmailField()
+    content = models.TextField()
+    publish = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+
+    class MPTTMeta:
+        order_insertion_by = ['publish']
+
+    def __str__(self):
+        return self.name
