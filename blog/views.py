@@ -1,6 +1,8 @@
 from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, HttpResponseRedirect
 from .models import Article, Category, Tag
+from .forms import NewCommentForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class ArticleListView(ListView):
@@ -18,6 +20,36 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['latest_articles'] = Article.objects.published().exclude(pk=self.object.pk)[:3]
+
+        article = self.get_object()
+
+        allcomments = article.comments.filter(status=True)
+        page = self.request.GET.get('page', 1)
+
+        paginator = Paginator(allcomments, 10)
+        try:
+            comments = paginator.page(page)
+        except PageNotAnInteger:
+            comments = paginator.page(1)
+        except EmptyPage:
+            comments = paginator.page(paginator.num_pages)
+
+        user_comment = None
+
+        if self.request.method == 'POST':
+            comment_form = NewCommentForm(self.request.POST)
+            if comment_form.is_valid():
+                user_comment = comment_form.save(commit=False)
+                user_comment.article = article
+                user_comment.save()
+                return HttpResponseRedirect('/' + article.slug)
+        else:
+            comment_form = NewCommentForm()
+
+        context['comments'] = comments
+        context['comment_form'] = comment_form
+        context['allcomments'] = allcomments
+
         return context
 
 
