@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView
-from django.shortcuts import get_object_or_404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect
 from .models import Article, Category, Tag
 from .forms import NewCommentForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -42,7 +42,7 @@ class ArticleDetailView(DetailView):
                 user_comment = comment_form.save(commit=False)
                 user_comment.article = article
                 user_comment.save()
-                return HttpResponseRedirect('/' + article.slug)
+                return redirect('blog:article-detail', article.slug)
         else:
             comment_form = NewCommentForm()
 
