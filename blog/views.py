@@ -36,15 +36,24 @@ class ArticleDetailView(DetailView):
 
         user_comment = None
 
+        context['comments'] = comments
+        context['comment_form'] = NewCommentForm()
+        context['allcomments'] = allcomments
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        article = self.get_object()
+        comment_form = NewCommentForm(self.request.POST or None) 
         if self.request.method == 'POST':
-            comment_form = NewCommentForm(self.request.POST)
+              # comment_form = NewCommentForm(self.request.POST)
             if comment_form.is_valid():
                 user_comment = comment_form.save(commit=False)
                 user_comment.article = article
                 user_comment.save()
-                return redirect('blog:article-detail', article.slug)
-        else:
-            comment_form = NewCommentForm()
+                return redirect('blog:article-detail', slug=article.slug)
+            else:
+                comment_form = NewCommentForm()
 
         context['comments'] = comments
         context['comment_form'] = comment_form
