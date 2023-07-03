@@ -13,26 +13,18 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'core_app:contact-us' %}">Contact Us</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown 1
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdown1">
-          <a class="dropdown-item" href="#">Item 1</a>
-          <a class="dropdown-item" href="#">Item 2</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Item 3</a>
-        </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'blog:article-list' %}">Blog</a>
       </li>
+      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown 2
+          Category
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdown2">
-          <a class="dropdown-item" href="#">Item A</a>
-          <a class="dropdown-item" href="#">Item B</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Item C</a>
+          {% for category in categories %}
+          <a class="dropdown-item" href="{% url 'blog:category-view' category.slug %}">{{ category.name }}</a>
+          {% endfor %}
         </div>
       </li>
       <li class="nav-item">

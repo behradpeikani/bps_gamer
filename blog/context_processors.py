@@ -1,8 +1,8 @@
-from .models import Tag, Article
+from .models import Category, Article
 
-def tags_processor(request):
-    tags = Tag.objects.all()
-    return {'tags': tags}
+def categories_processor(request):
+    categories = Category.objects.all()
+    return {'categories': categories}
 
 def articles_processor(request):
     articles = Article.objects.published()
