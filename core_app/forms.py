@@ -2,24 +2,6 @@ from django import forms
 from .models import Comment, ContactUs
 
 
-class CommentForm(forms.ModelForm):
-    author = forms.CharField(widget=forms.TextInput(attrs=
-        {"placeholder": "Enter Your Name",
-        "class": "form-control"
-        }))
-
-    content = forms.CharField(widget=forms.Textarea(attrs=
-        {"placeholder": "Type Your Comment",
-        "class": "form-control",
-        "rows": 10, "cols": 40,
-        "style": "resize: none;"
-        }))
-    
-    class Meta:
-        model = Comment
-        fields = ['content', 'author']
-
-
 class ContactForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs=
         {"placeholder": "Enter Your Name",

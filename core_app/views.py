@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 from django.views.generic import TemplateView
 from django.views import View
-from .models import AboutUs, Comment, ContactUs
-from .forms import CommentForm, ContactForm
+from .models import AboutUs, ContactUs
+from .forms import ContactForm
 from django.contrib import messages
 
 

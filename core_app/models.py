@@ -14,16 +14,6 @@ class AboutUs(models.Model):
 		return self.title
 
 
-class Comment(models.Model):
-    content = models.TextField()
-    author = models.CharField(max_length=100)
-    timestamp = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='replies')
-
-    def __str__(self):
-        return self.content
-
-
 class ContactUs(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
