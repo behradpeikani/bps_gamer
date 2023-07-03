@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.shortcuts import get_object_or_404, redirect
 from .models import Article, Category, Tag
 from .forms import NewCommentForm
@@ -84,8 +84,5 @@ class CategoryView(ListView):
         slug = self.kwargs.get('slug')
         context["category"] = get_object_or_404(Category, slug=slug)
         return context
-
-
-
 
     

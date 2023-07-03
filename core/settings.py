@@ -61,6 +61,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # My Custom Context Processors
                 'blog.context_processors.tags_processor',
+                'blog.context_processors.articles_processor',
             ],
         },
     },
