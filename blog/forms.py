@@ -19,8 +19,8 @@ class NewCommentForm(forms.ModelForm):
         fields = ('name', 'parent', 'email', 'content')
 
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'col-sm-12'}),
-            'email': forms.TextInput(attrs={'class': 'col-sm-12'}),
+            'name': forms.TextInput(attrs={'class': 'col-sm-12 form-control'}),
+            'email': forms.TextInput(attrs={'class': 'col-sm-12 form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'cols': 40}),
         }
 
