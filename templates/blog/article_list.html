@@ -11,7 +11,7 @@
         <h2 class="display-20 display-md-18 display-lg-16"><i class="fa-sharp fa-solid fa-font-case">Most recent our blog</i></h2>
     </div>
     <div class="row">   
-    		{% for article in articles %}
+    	{% for article in articles %}
         <div class="col-lg-4 col-md-6 mb-2-6 mb-md-0">
             <article class="card card-style2">
                 <div class="card-img">
@@ -31,8 +31,56 @@
                     </ul>
                 </div>
             </article>
+
         </div>
         {% endfor %}
+        <!--Pagination-->
+
+                        <div class="col-12">
+                            <ul class="pagination justify-content-center">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                  </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                  </li>
+                                {% endif %}
+
+                                {% if page_obj.number|add:'-4' > 1 %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a></li>
+                                {% endif %}
+
+                                {% for i in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == i %}
+                                        <li class="page-item active" aria-current="page">
+                                      <span class="page-link">
+                                        {{ i }}
+                                        <span class="sr-only">(current)</span>
+                                      </span>
+                                    </li>
+                                    {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'5' }}">&hellip;</a></li>
+                                {% endif %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                  </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                                  </li>
+                                {% endif %}
+                              </ul>
+                        </div>
+                        <!--end of Pagination-->
     </div>
 </section>
 								
