@@ -30,23 +30,8 @@ class ContactUsView(FormView):
 
 class AboutUsPage(TemplateView):
 	template_name = 'core_app/about_us_page.html'
-	form_class = CommentForm
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['obj'] = AboutUs.objects.first()
-		context['comments'] = Comment.objects.all()
-		context['form'] = self.form_class
 		return context
-
-	def post(self, request):
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			form.save()
-			messages.success(request,
-			 'Your message has been sent successfully.', 'success')
-			return redirect('core_app:about-us')
-		else:
-			messages.error(self
-				, 'Error sending the message.', 'error')
-		return render(request, 'core_app/about_us_page.html', {'form': form})
