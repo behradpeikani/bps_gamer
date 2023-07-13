@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, redirect
 from .models import Article, Category, Tag
 from .forms import NewCommentForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
+from django.views import View
 
 
 class ArticleListView(ListView):
@@ -85,4 +87,20 @@ class CategoryView(ListView):
 		context["category"] = get_object_or_404(Category, slug=slug)
 		return context
 
+
+class SearchList(View):
+    template_name = 'blog/search_list.html'
+
+    def get(self, request, *args, **kwargs):
+        search = self.request.GET.get('q')
+        articles = Article.objects.published()
+
+        if search:
+        	result = articles.filter(Q(content__icontains=search) | Q(title__icontains=search))
+        
+        paginator = Paginator(result, 9)
+        page_number = request.GET.get('page')
+        result = paginator.get_page(page_number)
+
+        return render(request, self.template_name, {"result": result, "search": search})
 	

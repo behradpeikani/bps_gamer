@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %} {% endblock title %}
+
+{% block content %}
+
+<section>
+    <div class="text-center mb-5">
+        <h2 class="display-20 display-md-18 display-lg-16"><i class="fa-sharp fa-solid fa-font-case">Most recent our blog</i></h2>
+    </div>
+    <div class="row">   
+    	{% for element in result %}
+        <div class="col-lg-4 col-md-6 mb-2-6 mb-md-0">
+            <article class="card card-style2">
+                <div class="card-img">
+                    {% thumbnail element.image "350x280" crop="center" as im %}
+                    <img class="rounded-top" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="...">
+                    {% endthumbnail %}
+                    <div class="date"><span>{{ element.created_at|date:"j" }}</span>{{ element.created_at|date:"F" }}</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="h5"><a href="{% url 'blog:article-detail' element.slug %}">{{ element.title }}</a></h3>
+                    <p class="display-30">{{ element.content|truncatewords:10|safe }}</p>
+                    <a href="{% url 'blog:article-detail' element.slug %}" class="read-more">read more</a>
+                </div>
+                <div class="card-footer">
+                    <ul>
+                        <li><a href="#"><i class="fas fa-user"></i>{{ element.author.username }}</a></li>
+                    </ul>
+                </div>
+            </article>
+
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
