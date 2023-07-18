@@ -6,6 +6,12 @@ import random
 from mptt.models import MPTTModel, TreeForeignKey
 
 
+def article_image_upload_to(instance, filename):
+    # Generate a unique filename based on the article title
+    title = instance.title
+    slug = slugify(title)
+    return f'blog/{slug}/{filename}'
+
 # Model Manager
 class ArticlePublishManager(models.Manager):
     def published(self):
@@ -47,7 +53,7 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, max_length=100, blank=True)
     content = RichTextUploadingField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to=article_image_upload_to)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)
