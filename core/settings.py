@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     #Local Apps
     'blog.apps.BlogConfig',
     'core_app.apps.CoreAppConfig',
-    'videos.apps.VideosConfig',
     # Third-Party Packages
     'ckeditor',
     'ckeditor_uploader',
